@@ -14,3 +14,20 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+
+.numeros li{
+    display: inline-block;
+    margin: 0 12px 0 0;   
+    font-size: 1.8rem;
+    color: #fff;
+    background: red;
+    border-radius: 35px;
+    width: 30px;
+    height: 30px;
+    padding: 5px 0;
+    text-align: center;
+    }
+
+    .acertados li {
+        background: #209869;
+    }

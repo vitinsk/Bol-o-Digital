@@ -1,0 +1,27 @@
+page-modal-aposta {
+
+    .numeros li{
+        display: inline-block;
+        margin: 0 12px 10px 0;   
+        font-size: 1.8rem;
+        color: #fff;
+        background: red;
+        border-radius: 35px;
+        width: 40px;
+        height: 40px;
+        padding: 7px 0;
+        text-align: center;
+        }
+
+        .acertados li {
+            background: green;
+        }
+    
+}
+
+ion-card{
+    text-align: center;
+   
+   }
+
+

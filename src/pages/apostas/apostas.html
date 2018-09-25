@@ -1,0 +1,50 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Apostas</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+    <ion-card *ngIf="evento" style="text-align: center;">
+        <ion-card-header>
+          <h1>Evento: {{evento.id}}</h1>          
+          <h1>{{evento.status}}</h1>          
+        </ion-card-header>
+        <ion-card-content>
+            <h2>Numeros Sorteados: {{evento.numeroSorteadoLoteria}}</h2>
+            
+            <h3>Total de Apostas: {{evento.qtdApostas}}</h3>
+            <h3>Taxa de Entrada: R${{evento.vlrParticipacao}}</h3>      
+            <h3>Valor Premiação: R${{evento.vlrLiquido}}</h3>
+        </ion-card-content>
+      </ion-card>
+  
+
+
+
+  <ion-list>
+    <button ion-item *ngFor="let aposta of apostas" (click)="abrirModal(aposta)">
+      <h2>Aposta nº: {{aposta.id}} Acertos: {{aposta.acertos}}</h2>
+      
+      <div class="numeros">
+        <ul>   
+          <li *ngFor="let numeros of aposta.numero_apostado">{{numeros}}</li> 
+        </ul>
+      </div> 
+      <p>Nº acertados: {{aposta.numeros_acertados}}</p>
+      <div class="numeros acertados">
+        <ul> 
+          <li *ngFor="let numeros of aposta.numeros_acertados">{{numeros}}</li> 
+        </ul>
+      </div> 
+     
+    
+    </button>
+  </ion-list>
+
+</ion-content>
