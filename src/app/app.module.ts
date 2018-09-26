@@ -12,6 +12,7 @@ import { EventoProvider } from '../providers/evento/evento';
 import { HttpClientModule } from '@angular/common/http';
 import { ApostasProvider } from '../providers/apostas/apostas';
 import { ModalApostaPage } from '../pages/modal-aposta/modal-aposta';
+import { CadastroApostaPage } from '../pages/cadastro-aposta/cadastro-aposta';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { ModalApostaPage } from '../pages/modal-aposta/modal-aposta';
     MyApp,
     HomePage,
     ListPage,
-    ModalApostaPage
+    ModalApostaPage,
+    CadastroApostaPage
   ],
   imports: [
     BrowserModule,
@@ -32,7 +34,8 @@ import { ModalApostaPage } from '../pages/modal-aposta/modal-aposta';
     MyApp,
     HomePage,
     ListPage,   
-    ModalApostaPage
+    ModalApostaPage,
+    CadastroApostaPage
   ],
   providers: [
     StatusBar,

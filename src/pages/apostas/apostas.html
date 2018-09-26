@@ -23,8 +23,15 @@
             <h3>Valor Premiação: R${{evento.vlrLiquido}}</h3>
         </ion-card-content>
       </ion-card>
+      
   
-
+      <ion-grid>
+        <ion-row>
+          <ion-col col-12 col-sm-9 col-md-6 col-lg-4 col-xl-3>
+            <button ion-button class="apostar" *ngIf="botao" (click)="cadastroAposta(evento)">Realizar Aposta</button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
 
 
   <ion-list>

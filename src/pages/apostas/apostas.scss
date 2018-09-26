@@ -2,8 +2,20 @@ page-apostas {
     ion-card {
         text-align: center;
     }
+    d
+    .apostar{
+        display: block;        
+        background-color: blue;
+        color: white;      
+        margin-left: 0px;        
+        flex: 15;
 
+    }
+    .apostar :hover{
+        color: white;
+    }
 
+   
         
 }
 

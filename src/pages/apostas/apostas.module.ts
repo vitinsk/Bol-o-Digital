@@ -2,15 +2,18 @@ import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { ApostasPage } from './apostas';
 
+
 @NgModule({
   declarations: [
-    ApostasPage,
-
+    ApostasPage,   
+    
   ],
 
-  imports: [ 
-
+  imports: [     
     IonicPageModule.forChild(ApostasPage),
   ],
+  entryComponents: [
+    
+  ]
 })
 export class ApostasPageModule {}

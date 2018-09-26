@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, ModalController} from 'ionic-angular';
 import { ApostasProvider } from '../../providers/apostas/apostas';
 import { EventoProvider } from '../../providers/evento/evento';
 import { ModalApostaPage } from '../modal-aposta/modal-aposta';
 import { Aposta } from '../../models/apostas';
 import { Metodos } from '../../utils/metodos';
+import { CadastroApostaPage } from '../cadastro-aposta/cadastro-aposta';
 
 @IonicPage()
 @Component({
@@ -15,14 +16,11 @@ export class ApostasPage {
   apostas: Aposta[]; 
   evento: any;
   num = [];
+  botao = false;
 
   metodos = new Metodos;
- 
-  teste = [1,2,3,4,5,6];
 
- 
-
-  constructor(public navCtrl: NavController,
+  constructor(public navCtrl: NavController,    
      public navParams: NavParams,
       public loadingCtrl: LoadingController,
       public apostaService: ApostasProvider,
@@ -30,12 +28,9 @@ export class ApostasPage {
       public modalCtrl: ModalController) {
   }
 
-  ionViewDidLoad() {
-    
+  ionViewDidLoad() {    
     this.loadApostas();
-    this.loadEventoInfo();
-
-  
+    this.loadEventoInfo();    
   }
 
   loadApostas(){
@@ -50,7 +45,7 @@ export class ApostasPage {
            
       }   
       
-      console.log(this.apostas);
+    
     })
   }
 
@@ -58,6 +53,7 @@ export class ApostasPage {
     let evento_id = this.navParams.get('evento_id');
     this.eventoService.findById(evento_id).subscribe(response => {
       this.evento = response
+      this.mostrarBotao(this.evento);
     })
   }
 
@@ -65,6 +61,26 @@ export class ApostasPage {
     let modalAposta = this.modalCtrl.create(ModalApostaPage, {dados: dados});
     modalAposta.present();
   }
+
+  mostrarBotao(evento){ 
+    console.log(evento.status)
+    console.log(evento.status)
+    if(evento.status != "INATIVO"){      
+      this.botao = false;
+    }
+    else{
+      this.botao = true;
+    }
+  }
+
+  cadastroAposta(evento){
+    this.navCtrl.setRoot(CadastroApostaPage, {evento: evento}) 
+  }
+
+  cadastroAposta1(evento_id: String){
+    this.navCtrl.push('CadastroApostaPage', {evento: evento_id})
+  }
+
 
 
 
