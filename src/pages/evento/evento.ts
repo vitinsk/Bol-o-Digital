@@ -1,13 +1,15 @@
 import { Component } from '@angular/core';
-import { NavController} from 'ionic-angular';
+import { IonicPage, NavController} from 'ionic-angular';
 import { EventoProvider } from '../../providers/evento/evento';
+import { STORAGE_KEYS } from '../../config/storage_keys.config';
 
 
+@IonicPage()
 @Component({
-  selector: 'page-home',
-  templateUrl: 'home.html'
+  selector: 'page-evento',
+  templateUrl: 'evento.html',
 })
-export class HomePage {
+export class EventoPage {
 
   eventos: any[];
 
@@ -15,7 +17,13 @@ export class HomePage {
    
   }
 
-  ionViewDidLoad(){
+  ionViewDidEnter(){
+
+    if(localStorage.getItem(STORAGE_KEYS.localUser) == null){     
+      this.navCtrl.setRoot('LoginPage');
+      return
+    }
+    
     this.service.findAll().subscribe(retorno => {
       this.eventos = retorno;
       console.log(this.eventos);

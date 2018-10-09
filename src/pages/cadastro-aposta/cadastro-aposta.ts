@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController} from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController, AlertController} from 'ionic-angular';
+import { ApostadorProvider } from '../../providers/apostador/apostador';
+import { STORAGE_KEYS } from '../../config/storage_keys.config';
+import { Apostar } from '../../models/apostar';
+import { ApostasProvider } from '../../providers/apostas/apostas';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @IonicPage()
 @Component({
@@ -14,18 +19,30 @@ export class CadastroApostaPage {
   numeroString: string;
   numeros = [];
   selecionado = [];
+  botaoApostar = false;
+  Apostar = new Apostar;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public view: ViewController) {
+  constructor(public navCtrl: NavController,
+     public navParams: NavParams, 
+     public view: ViewController,
+     public apostadorService: ApostadorProvider,
+    public apostaService: ApostasProvider,
+  public alertCtrl: AlertController) {
   }
 
   ionViewDidLoad() {
+   
+    
     this.evento = this.navParams.get('evento');
-
+    if(this.evento == null){
+      this.navCtrl.setRoot('EventoPage')
+      return null;
+    }
     this.geradorDeNumeros();
   }
 
   selecionarNumero(numero) {
-
+    
     if (this.selecionado.length < 6) {
       this.mudaCorNumero(numero);
 
@@ -50,7 +67,7 @@ export class CadastroApostaPage {
 
 
     }
-
+    this.mostrarBotaoApostar(this.selecionado);
   }
   removerPorIndice(numero) {
     if (this.selecionado.indexOf(numero) != -1) {
@@ -83,6 +100,88 @@ export class CadastroApostaPage {
 
   voltar() {
     this.view.dismiss();
+  }
+
+
+  mostrarBotaoApostar(dados){
+    if(dados.length == 6){
+      this.botaoApostar = true;
+    }else{
+      this.botaoApostar = false;
+    }
+  }
+
+
+  cadastrarAposta(){
+   
+    this.apostaService.save(this.Apostar);
+ 
+    this.apostadorService.findByEmail(this.pegarEmail()).subscribe(response => {
+      let apostinha : Apostar = {
+        apostador_id: response['id'].toString(),
+        numeros_apostados: this.numeroString,
+        evento_id: this.evento.id.toString()
+      }
+      
+      this.apostaService.save(apostinha).subscribe(
+        response => {
+          this.showInsertOk();
+        },
+        error =>{
+          
+          this.showError(error);
+        }
+        
+      );
+      
+    });
+    
+    
+
+  }
+
+  pegarEmail(){
+    let localU = localStorage.getItem("localUser");
+    let posicao = localU.lastIndexOf(':');
+    return localU.substring(posicao + 2, localU.length - 2);
+  }
+
+  showInsertOk(){
+    let alert = this.alertCtrl.create({
+      title:'Sucesso',
+      message:'Aposta Efetuada com Sucesso',
+      enableBackdropDismiss: false,
+      buttons:[{
+        text:'OK',
+        handler:() => {
+          this.navCtrl.pop();
+        }
+      }]
+    });
+    alert.present();
+  }
+
+  showError(error: HttpErrorResponse){
+    let alert = this.alertCtrl.create({
+      title:'Error',
+      message: this.msgError(error.error),
+      enableBackdropDismiss: false,
+      buttons:[{
+        text:'Sair',
+        handler:() => {
+          this.navCtrl.pop();
+        }
+       
+      }]
+    });
+    alert.present();
+  }
+
+  msgError(error : string){
+    let position = error.lastIndexOf('message');
+    let positionFim = error.indexOf('path');
+    let msgErro = error.substring(position + 10, positionFim - 3)
+    return msgErro;
   }
 
 }

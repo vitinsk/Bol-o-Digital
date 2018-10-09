@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, ModalController} from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, ModalController, ToastController} from 'ionic-angular';
 import { ApostasProvider } from '../../providers/apostas/apostas';
 import { EventoProvider } from '../../providers/evento/evento';
-import { ModalApostaPage } from '../modal-aposta/modal-aposta';
 import { Aposta } from '../../models/apostas';
 import { Metodos } from '../../utils/metodos';
-import { CadastroApostaPage } from '../cadastro-aposta/cadastro-aposta';
+
 
 @IonicPage()
 @Component({
@@ -17,6 +16,7 @@ export class ApostasPage {
   evento: any;
   num = [];
   botao = false;
+  ganhadorOn = true;
 
   metodos = new Metodos;
 
@@ -25,12 +25,22 @@ export class ApostasPage {
       public loadingCtrl: LoadingController,
       public apostaService: ApostasProvider,
       public eventoService: EventoProvider,
-      public modalCtrl: ModalController) {
+      public modalCtrl: ModalController,
+    public toastCtrl: ToastController) {
   }
 
-  ionViewDidLoad() {    
+ /* ionViewDidLoad() {    
     this.loadApostas();
     this.loadEventoInfo();    
+  }*/
+  ionViewDidEnter(){
+    this.loadApostas();
+    this.loadEventoInfo();
+    let evento_id = this.navParams.get('evento_id');
+    if(evento_id == null){
+      this.navCtrl.setRoot('EventoPage')
+      return null;
+    }
   }
 
   loadApostas(){
@@ -58,7 +68,7 @@ export class ApostasPage {
   }
 
   abrirModal(dados: any) {
-    let modalAposta = this.modalCtrl.create(ModalApostaPage, {dados: dados});
+    let modalAposta = this.modalCtrl.create('ModalApostaPage', {dados: dados});
     modalAposta.present();
   }
 
@@ -73,17 +83,26 @@ export class ApostasPage {
     }
   }
 
-  cadastroAposta(evento){
-    this.navCtrl.setRoot(CadastroApostaPage, {evento: evento}) 
-  }
-
-  cadastroAposta1(evento_id: String){
+  cadastroAposta(evento_id: String){
     this.navCtrl.push('CadastroApostaPage', {evento: evento_id})
   }
+
+
+  presentToast() {
+    const toast = this.toastCtrl.create({
+      message: 'Email enviado com sucesso!',
+      duration: 3000,
+      position: 'middle',
+      showCloseButton: true,
+      closeButtonText: 'Sair'
+    });
+    toast.present();
+  }
+}
 
 
 
 
   
 
-}
+

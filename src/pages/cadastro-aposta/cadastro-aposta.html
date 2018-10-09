@@ -11,7 +11,8 @@
     
     <hr>
     <div style="align-content: center">
-    <ion-input id="numeroString" (ngBind)="numeroString" type="text" value="{{numeroString}}" disabled></ion-input>
+    <ion-input id="numeroString" (ngBind)="numeroString" type="text" value="{{numeroString}}" disabled></ion-input> 
+   
     </div>
   </ion-navbar>
 
@@ -19,7 +20,7 @@
 
 
 <ion-content padding>
-
+  <button ion-button style="width: 100%" *ngIf="botaoApostar" (click)="cadastrarAposta()">Gerar Aposta</button>  
 <div class="">  
   <ul class="cadNumeros">
     <li id={{numero}} *ngFor="let numero of numeros"(click)="selecionarNumero(numero)">{{numero}}</li>

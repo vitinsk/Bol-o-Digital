@@ -9,11 +9,13 @@
 
 
 <ion-content padding>
-
+  <button ion-button color="default" *ngIf="ganhadorOn" (click)="presentToast()" round>Ganhadores</button>
     <ion-card *ngIf="evento" style="text-align: center;">
         <ion-card-header>
-          <h1>Evento: {{evento.id}}</h1>          
-          <h1>{{evento.status}}</h1>          
+          <h1>Evento: {{evento.id}}</h1>  
+     
+          <h1>{{evento.status}}</h1>    
+          <hr>      
         </ion-card-header>
         <ion-card-content>
             <h2>Numeros Sorteados: {{evento.numeroSorteadoLoteria}}</h2>
