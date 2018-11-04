@@ -17,4 +17,17 @@ export class EventoProvider {
     return this.http.get<any>(`${API_CONFIG.baseUrl}/evento/${evento_id}`)
   }
 
+  findInativo(): Observable<any[]>{
+    return this.http.get<any>(`${API_CONFIG.baseUrl}/evento/inativo`)
+  }
+
+  ativar(evento_id: string): Observable<any>{
+    return this.http.put(`${API_CONFIG.baseUrl}/evento/ativar/${evento_id}`,
+    evento_id)
+  }
+
+  sincronizar(): Observable<any>{
+    return this.http.get<any>(`${API_CONFIG.baseUrl}/sincronizar`)
+  }
+
 }

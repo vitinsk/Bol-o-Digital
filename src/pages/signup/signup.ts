@@ -53,15 +53,15 @@ export class SignupPage {
   ionViewWillEnter() {
     this.menu.swipeEnable(false);
     }
-    ionViewDidLeave() {
-    this.menu.swipeEnable(true);
-    }
+  
 
     voltar(){
       this.view.dismiss();
     }
 
     cadastrarApostador(){
+      
+      this.formGroup.value.email
       this.apostadorService.insert(this.formGroup.value)
       .subscribe(response => {
         this.showInsertOk();

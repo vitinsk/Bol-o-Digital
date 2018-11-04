@@ -5,8 +5,11 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
+    
   <ion-navbar>
+      <button ion-button menuToggle="left">
+          <ion-icon name="menu"></ion-icon>
+      </button>
     <ion-title>Evento</ion-title>
   </ion-navbar>
 
@@ -14,13 +17,18 @@
 
 <ion-content padding>
   <ion-list>
-    <button ion-item *ngFor="let evento of eventos" (click)="showApostas(evento.id)">
-   
-      <h2>Evento: {{evento.id}} - Concurso nº: {{evento.concurso}}</h2>
-      <h1>Status: {{evento.status}}</h1>
+    <button ion-item *ngFor="let evento of eventos" (click)="showApostas(evento.id, evento)">
+      <div class="evento">
+      <h2>Evento: {{evento.id}}</h2>
+      <h2>Status: {{evento.status}}</h2>
+      <h4>Pressione aqui para vizualizar.</h4>
+      
+    </div>
     </button>
-  
+
   </ion-list>
+
+
   
   
   </ion-content>

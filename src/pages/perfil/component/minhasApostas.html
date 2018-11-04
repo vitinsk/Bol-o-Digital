@@ -1,0 +1,37 @@
+<ion-content>
+<ion-card>
+    <ion-card-header>
+      Minhas Apostas
+    </ion-card-header>
+    <ion-card-content>
+    
+     
+    </ion-card-content>
+
+  
+  </ion-card>
+  <ion-list>
+    <button ion-item *ngFor="let aposta of apostas">
+      <br>
+      
+      <h3>Evento: {{aposta.eventos.id}}</h3>
+      <h3>Status: {{aposta.eventos.status}} </h3>
+      <h2>Aposta nº: {{aposta.id}}</h2>
+      
+      <div class="numeros">
+        <ul>   
+          <li *ngFor="let numeros of aposta.numero_apostado">{{numeros}}</li> 
+        </ul>
+      </div> 
+      <p>Nº acertados</p>
+      <div class="numeros acertados">
+        <ul> 
+          <li *ngFor="let numeros of aposta.numeros_acertados">{{numeros}}</li> 
+        </ul>
+      </div> 
+      Acertos: {{aposta.acertos}}
+    
+    </button>
+  </ion-list>
+
+</ion-content>

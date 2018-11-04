@@ -13,12 +13,21 @@ import { ApostadorProvider } from '../providers/apostador/apostador';
 import { StorageProvider } from '../providers/storage/storage';
 import { AuthProvider } from '../providers/auth/auth';
 import { AuthInterceptorProvider } from '../interceptors/auth.-interceptors';
+import { Tab1 } from '../pages/perfil/component/tab1';
+import { Tab2 } from '../pages/perfil/component/tab2';
+import { ResultadoProvider } from '../providers/resultado/resultado';
+import { AdminProvider } from '../providers/admin/admin';
+import { BrMaskerModule } from 'brmasker-ionic-3';
+
 
 
 
 @NgModule({
   declarations: [
-    MyApp
+    MyApp,
+    Tab1,
+    Tab2
+    
   
     
   ],
@@ -26,10 +35,14 @@ import { AuthInterceptorProvider } from '../interceptors/auth.-interceptors';
     BrowserModule,
     HttpClientModule,
     IonicModule.forRoot(MyApp),
+    BrMaskerModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp 
+    MyApp,   
+    Tab1 ,
+    Tab2
+    
     
   ],
   providers: [
@@ -41,7 +54,9 @@ import { AuthInterceptorProvider } from '../interceptors/auth.-interceptors';
     ApostadorProvider,    
     StorageProvider,
     AuthProvider,
-    AuthInterceptorProvider
+    AuthInterceptorProvider,
+    ResultadoProvider,
+    AdminProvider
   ]
 })
 export class AppModule {}

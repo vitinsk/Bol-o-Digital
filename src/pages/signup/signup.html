@@ -22,11 +22,13 @@
       <ion-label stacked>Nome*</ion-label>
       <ion-input formControlName="nome" type="text"></ion-input>
     </ion-item>
-
+  
     <ion-item>
       <ion-label stacked>Telefone*</ion-label>
-      <ion-input formControlName="telefone" type="text"></ion-input>
+      <ion-input formControlName="telefone" type="text" name="phone" placeholder="(31) 00000-0000" [brmasker]="{phone: true}"></ion-input>
     </ion-item>
+
+    
 
     <ion-item>
       <ion-label stacked>Email*</ion-label>

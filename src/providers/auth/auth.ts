@@ -6,6 +6,7 @@ import { API_CONFIG } from '../../config/api.config';
 import { LocalUser } from '../../models/local_user';
 import {JwtHelper} from 'angular2-jwt';
 
+
 /*
   Generated class for the AuthProvider provider.
 
@@ -21,6 +22,8 @@ export class AuthProvider {
   public storage: StorageProvider) {
     
   }
+
+
 
   authenticate(cred: CredenciaisDTO){
     return this.http.post(

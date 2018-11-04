@@ -1,4 +1,3 @@
-
 <ion-header>
 
   <ion-navbar>
@@ -8,52 +7,99 @@
 </ion-header>
 
 
-<ion-content padding>
-  <button ion-button color="default" *ngIf="ganhadorOn" (click)="presentToast()" round>Ganhadores</button>
-    <ion-card *ngIf="evento" style="text-align: center;">
-        <ion-card-header>
-          <h1>Evento: {{evento.id}}</h1>  
-     
-          <h1>{{evento.status}}</h1>    
-          <hr>      
-        </ion-card-header>
-        <ion-card-content>
-            <h2>Numeros Sorteados: {{evento.numeroSorteadoLoteria}}</h2>
-            
-            <h3>Total de Apostas: {{evento.qtdApostas}}</h3>
-            <h3>Taxa de Entrada: R${{evento.vlrParticipacao}}</h3>      
-            <h3>Valor Premiação: R${{evento.vlrLiquido}}</h3>
-        </ion-card-content>
-      </ion-card>
-      
+<ion-content padding class="page-apostas">
   
-      <ion-grid>
-        <ion-row>
-          <ion-col col-12 col-sm-9 col-md-6 col-lg-4 col-xl-3>
-            <button ion-button class="apostar" *ngIf="botao" (click)="cadastroAposta(evento)">Realizar Aposta</button>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
 
+    <button class="btn-ganhador" ion-button color="default" *ngIf="ganhadorOn" (click)="mostrarResultado(evento)" round>Ganhadores</button>
+  <ion-item class="menu"*ngIf="evento"> 
+    <div class="cabecalho">
+      <h2>Numeros Sorteados</h2>
+      <div id="num">
+      <span text-wrap>{{evento.numeroSorteadoLoteria}}</span>
+    </div>
+      <h2>Total de Apostas:</h2>
+      <h1>{{evento.qtdApostas}}</h1>
+     
+      <table>
+        <th>Valor Premio</th>
+        <th>Taxa de Entrada</th>
+
+        <tr>
+          <td>{{evento.vlrLiquido}}</td>
+          <td>{{evento.vlrParticipacao}}</td>
+        </tr>
+      </table>
+<br>
+      <h1 *ngIf="apostador" style="color: green">Saldo: R$ {{apostador.saldo}},00</h1>
+    </div>
+
+  </ion-item>
+
+
+  
+ <!-- <ion-card *ngIf="evento" style="text-align: center;">
+    <ion-card-header>
+      <h1>Evento: {{evento.id}}</h1>
+  
+      <h1>{{evento.status}}</h1>
+      <hr>
+    </ion-card-header>
+    <ion-card-content>
+      <h2>Numeros Sorteados:</h2>
+      <p> {{evento.numeroSorteadoLoteria}}</p>
+      <hr>
+  
+      <h3>Total de Apostas: {{evento.qtdApostas}}</h3>
+      <h3>Taxa de Entrada: {{evento.vlrParticipacao}}</h3>
+      <h3>Valor Premiação: {{evento.vlrLiquido}}</h3>
+      <hr>
+      <h1 *ngIf="apostador">Saldo disponivel: R$ {{apostador.saldo}}</h1>
+    </ion-card-content>
+  </ion-card>-->
+
+
+  <ion-grid>
+
+    <ion-row>
+      <ion-col col-12 col-sm-9 col-md-6 col-lg-4 col-xl-3>
+        <h2 class="msg" *ngIf="!btn_apostar">{{txt_msg_apostar}}</h2>
+        <button ion-button class="apostar btn-apostar" *ngIf="btn_apostar" (click)="cadastroAposta(evento)" round>Realizar Aposta</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <div class="verTudo" (click)="todasApostas(evento.id)">    
+    <img src="../../assets/icon/globe-grid (2).png" alt="">
+    <p style="margin-top: -8px;">Pressione para</p>
+    <p style="margin-top: -18px;">ver todas apostas</p>
+  </div>
+
+
+  <div class="minhasApostas">
+  
+      <h2>Minhas Apostas</h2>
+      <h1 *ngIf="!apostas" style="color: red">Você não possui apostas</h1>
+    </div>
 
   <ion-list>
-    <button ion-item *ngFor="let aposta of apostas" (click)="abrirModal(aposta)">
+    <div class="lista-aposta" ion-item *ngFor="let aposta of apostas" (click)="abrirModal(aposta)">
       <h2>Aposta nº: {{aposta.id}} Acertos: {{aposta.acertos}}</h2>
-      
-      <div class="numeros">
-        <ul>   
-          <li *ngFor="let numeros of aposta.numero_apostado">{{numeros}}</li> 
-        </ul>
-      </div> 
-      <p>Nº acertados: {{aposta.numeros_acertados}}</p>
-      <div class="numeros acertados">
-        <ul> 
-          <li *ngFor="let numeros of aposta.numeros_acertados">{{numeros}}</li> 
-        </ul>
-      </div> 
+
      
-    
-    </button>
+      <div class="numeros">
+        <ul>
+          <li *ngFor="let numeros of aposta.numero_apostado">{{numeros}}</li>
+        </ul>
+      </div>
+      <span>Nº acertados</span>
+      <div class="numeros acertados">
+        <ul>
+          <li *ngFor="let numeros of aposta.numeros_acertados">{{numeros}}</li>
+        </ul>
+      </div>
+
+      <h4>Pressione para ver mais detalhes</h4>
+    </div>
   </ion-list>
 
 </ion-content>

@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, MenuController, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController, ModalController, AlertController, LoadingController } from 'ionic-angular';
 import { CredenciaisDTO } from '../../models/credenciais.dto';
 import { AuthProvider } from '../../providers/auth/auth';
+import { HttpErrorResponse } from '@angular/common/http';
 
 /**
  * Generated class for the LoginPage page.
@@ -25,18 +26,18 @@ export class LoginPage {
     public navParams: NavParams,
     public menu: MenuController,
     public modalCtrl: ModalController,
-    public auth: AuthProvider) {
+    public auth: AuthProvider,
+  public alertCtrl: AlertController,
+public loadingCtrl: LoadingController) {
   }
 
-
-  ionViewWillEnter() {
-    this.menu.swipeEnable(false);
-    }
-    ionViewDidLeave() {
+  ionViewDidLeave() {
     this.menu.swipeEnable(true);
     }
 
+
     ionViewDidEnter(){
+      this.menu.swipeEnable(false);
       this.auth.refreshToken()
       .subscribe(response =>{     
         this.auth.successfulLogin(response.headers.get('Authorization'));
@@ -50,10 +51,17 @@ export class LoginPage {
     login(){
       this.auth.authenticate(this.creds)
       .subscribe(response =>{ 
+       
         this.auth.successfulLogin(response.headers.get('Authorization'));
-        this.navCtrl.setRoot('EventoPage')
+        this.presentLoading();
+        
+        setTimeout(() => {
+          this.navCtrl.setRoot('EventoPage')
+        }, 1500);
       },
-      error => {});
+      error => {
+        this.showError(error)
+      });
       
       
     }
@@ -62,6 +70,27 @@ export class LoginPage {
    // this.navCtrl.push(SignupPage);
     let modalAposta = this.modalCtrl.create('SignupPage');
     modalAposta.present();
+  }
+
+  showError(error: HttpErrorResponse){
+    let alert = this.alertCtrl.create({
+      title:'Falha na autenticação.',
+      message: "Email e/ou senha inválidos.",
+      enableBackdropDismiss: false,
+      buttons:[{
+        text:'OK',
+       
+      }]
+    });
+    alert.present();
+  }
+
+  presentLoading() {
+    const loader = this.loadingCtrl.create({
+      content: "Carregando dados...",
+      duration: 2000
+    });
+    loader.present();
   }
 
  

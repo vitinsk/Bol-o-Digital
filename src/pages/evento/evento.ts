@@ -25,13 +25,12 @@ export class EventoPage {
     }
     
     this.service.findAll().subscribe(retorno => {
-      this.eventos = retorno;
-      console.log(this.eventos);
+      this.eventos = retorno; 
     })
   }
 
-  showApostas(evento_id: String){
-    this.navCtrl.push('ApostasPage', {evento_id: evento_id})
+  showApostas(evento_id: String, evento){
+    this.navCtrl.push('ApostasPage', {evento_id: evento_id, evento: evento})
   }
 
 }

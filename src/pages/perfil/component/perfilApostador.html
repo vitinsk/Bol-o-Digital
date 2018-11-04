@@ -1,0 +1,45 @@
+<ion-content>
+<br>
+<br>
+<br>
+<br>
+<ion-card  *ngIf="administrador">
+  <ion-card-header>
+      <ion-icon ios="ios-pie" md="md-pie"></ion-icon>
+    Administrativo
+  </ion-card-header>
+
+  <ion-list>
+    <button ion-item (click)="administrar()">
+      <ion-icon name="md-clipboard" item-start></ion-icon>
+      Eventos
+    </button>
+    <button ion-item (click)="apostadores()">
+      <ion-icon name="md-contacts" item-start></ion-icon>
+      Apostadores
+    </button>
+    <button ion-item (click)="relatorio()">
+      <ion-icon name="md-calculator" item-start></ion-icon>
+      Estatisticas
+    </button>
+
+
+  </ion-list>
+</ion-card>
+
+
+  <ion-card>
+    <ion-card-header>
+      Minhas Informações
+    </ion-card-header>
+    <ion-card-content *ngIf="apostador">
+      
+      <p>Nome: {{apostador.nome}}</p>
+      <p>Email: {{apostador.email}}</p>
+      <p>Contato: {{apostador.telefone}}</p>
+      <p>Saldo: R${{apostador.saldo}},00</p>
+      <hr>
+    
+    </ion-card-content>
+  </ion-card>
+</ion-content>`

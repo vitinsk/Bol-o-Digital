@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController, AlertController} from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController, AlertController, LoadingController} from 'ionic-angular';
 import { ApostadorProvider } from '../../providers/apostador/apostador';
-import { STORAGE_KEYS } from '../../config/storage_keys.config';
 import { Apostar } from '../../models/apostar';
 import { ApostasProvider } from '../../providers/apostas/apostas';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -27,7 +26,8 @@ export class CadastroApostaPage {
      public view: ViewController,
      public apostadorService: ApostadorProvider,
     public apostaService: ApostasProvider,
-  public alertCtrl: AlertController) {
+  public alertCtrl: AlertController,
+  public loadingCtrl: LoadingController) {
   }
 
   ionViewDidLoad() {
@@ -113,18 +113,25 @@ export class CadastroApostaPage {
 
 
   cadastrarAposta(){
-   
-    this.apostaService.save(this.Apostar);
+    let loading = this.loadingCtrl.create({
+      content: 'Validando aposta. Aguarde um instante.'
+    });
+    loading.present();
  
+    this.apostaService.save(this.Apostar);
+    
     this.apostadorService.findByEmail(this.pegarEmail()).subscribe(response => {
       let apostinha : Apostar = {
         apostador_id: response['id'].toString(),
         numeros_apostados: this.numeroString,
         evento_id: this.evento.id.toString()
       }
-      
+
       this.apostaService.save(apostinha).subscribe(
         response => {
+           
+   
+          loading.dismiss();
           this.showInsertOk();
         },
         error =>{
@@ -183,5 +190,19 @@ export class CadastroApostaPage {
     let msgErro = error.substring(position + 10, positionFim - 3)
     return msgErro;
   }
+
+
+  presentLoadingCustom() {
+    let loading = this.loadingCtrl.create({
+      content: 'Validando aposta. Aguarde um instante.'
+    });
+  
+    loading.present();
+  
+   
+      loading.dismiss();
+  
+  }
+  
 
 }

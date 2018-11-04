@@ -1,0 +1,89 @@
+<!--
+  Generated template for the AdminPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Administrar</ion-title>
+    <ion-buttons end>
+        <button ion-button (click)="voltar()">Voltar</button>
+      </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+<!--
+<ion-content padding>
+
+  <ion-list *ngIf="evento">    
+      <hr> 
+      <h2>Evento: {{evento.id}}</h2>
+      <h1>Status: {{evento.status}}</h1>
+   
+      <button ion-button (click)="ativar(evento.id)">Ativar</button>
+      <hr>
+  </ion-list>
+
+  <button ion-button (click)="sincronizar()">Sincronizar</button>
+</ion-content>
+-->
+
+<ion-content class="container transparent-header">
+
+    <div class="card-profile">
+     
+   
+     <br>
+    
+      <hr>
+      
+      <div class="card-profile_user-stats">
+        <div class="stats-holder" *ngIf="evento">
+          <div class="user-stats">
+            <strong>Evento</strong>
+            <P>{{evento.id}}</P>
+          </div>
+          <div class="user-stats">
+            <strong>Status</strong>
+            <P>{{evento.status}}</P>
+          </div> 
+     
+        </div>
+     
+      </div>
+
+      <div class="card-profile_user-stats">
+          <div class="stats-holder" *ngIf="evento">
+            <div class="user-stats">
+              <strong>Ativar</strong>
+              <button ion-button (click)="ativar(evento.id)">Ativar</button>
+            </div>    
+       
+       
+          </div>
+        
+        </div>
+
+        <div class="card-profile_user-stats">
+            <div class="stats-holder">           
+              <div class="user-stats">
+                <strong>Sincronizar</strong>
+                <button ion-button (click)="sincronizar()">Sincronizar</button>
+              </div>
+         
+         
+            </div>
+       
+          </div>
+
+  
+      </div>
+  
+    
+  
+   
+  </ion-content>
+
