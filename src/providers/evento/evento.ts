@@ -30,4 +30,13 @@ export class EventoProvider {
     return this.http.get<any>(`${API_CONFIG.baseUrl}/sincronizar`)
   }
 
+  findEmAndamento(): Observable<any>{
+    return this.http.get<any>(`${API_CONFIG.baseUrl}/evento/em-andamento`)
+  }
+
+  findFinalizados(): Observable<any>{
+    return this.http.get<any>(`${API_CONFIG.baseUrl}/evento/finalizados`)
+  }
+  
+
 }

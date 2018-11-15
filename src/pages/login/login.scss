@@ -1,6 +1,9 @@
 page-login {
 
-   
+   button{
+       
+    border-radius: 35px;
+   }
 
     .logo{
     display: block;
@@ -9,5 +12,9 @@ page-login {
     max-height: 170px;
     max-width: 170px;;
     
+    }
+
+    .btn{
+        border-radius: 35px;
     }
 }

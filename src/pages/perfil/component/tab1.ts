@@ -6,6 +6,7 @@ import { NavController, ModalController } from 'ionic-angular';
 
 @Component({
   templateUrl:'perfilApostador.html'
+  
 })
 export class Tab1 { 
 administrador = false;

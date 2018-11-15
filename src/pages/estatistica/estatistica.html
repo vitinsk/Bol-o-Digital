@@ -47,11 +47,11 @@
 
         <div class="user-stats">
           <strong>Arrecadação Bruta</strong>
-          <P>R$ {{receita.totalReceitaBruta}},00 </P>
+          <P>{{receita.totalReceitaBruta | currency:'BRL':true}} </P>
         </div>
         <div class="user-stats">
           <strong>Arrecadação Liquida</strong>
-          <P>R$ {{receita.totalReceitaLiquida}},00 </P>
+          <P>{{receita.totalReceitaLiquida | currency:'BRL':true}} </P>
         </div>
       </div>
       <hr>

@@ -6,27 +6,35 @@
 -->
 <ion-header>
     
-  <ion-navbar>
+ <!--  <ion-navbar>
       <button ion-button menuToggle="left">
           <ion-icon name="menu"></ion-icon>
       </button>
     <ion-title>Evento</ion-title>
-  </ion-navbar>
+  </ion-navbar> -->
 
 </ion-header>
 
 <ion-content padding>
-  <ion-list>
-    <button ion-item *ngFor="let evento of eventos" (click)="showApostas(evento.id, evento)">
-      <div class="evento">
+    <ion-tabs>
+        <ion-tab tabIcon="md-checkbox" tabTitle="Para Apostar" [root]="eventosAtivosTab"></ion-tab>
+        <ion-tab tabIcon="md-search" tabTitle="Todos Eventos" [root]="todosEventosTab"></ion-tab>
+        <ion-tab tabIcon="md-archive" tabTitle="Finalizados" [root]="eventosFinalizadosTab"></ion-tab>
+       
+
+      </ion-tabs>
+
+<!-- <ion-list>
+  <button ion-item *ngFor="let evento of eventos" (click)="showApostas(evento.id, evento)">
+    <div class="evento">
       <h2>Evento: {{evento.id}}</h2>
       <h2>Status: {{evento.status}}</h2>
       <h4>Pressione aqui para vizualizar.</h4>
-      
-    </div>
-    </button>
 
-  </ion-list>
+    </div>
+  </button>
+
+</ion-list> -->
 
 
   

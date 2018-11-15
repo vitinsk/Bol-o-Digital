@@ -18,6 +18,10 @@ import { Tab2 } from '../pages/perfil/component/tab2';
 import { ResultadoProvider } from '../providers/resultado/resultado';
 import { AdminProvider } from '../providers/admin/admin';
 import { BrMaskerModule } from 'brmasker-ionic-3';
+import { TodosEventosTab } from '../pages/evento/tabs/todosEventosTab';
+import { EventosFinalizadosTab } from '../pages/evento/tabs/eventos-finalizados/eventos-finalizados';
+import { EventosAtivosTab } from '../pages/evento/tabs/eventos-ativos/eventos-ativos';
+import {LOCALE_ID} from '@angular/core';
 
 
 
@@ -26,7 +30,10 @@ import { BrMaskerModule } from 'brmasker-ionic-3';
   declarations: [
     MyApp,
     Tab1,
-    Tab2
+    Tab2,
+    TodosEventosTab,
+    EventosFinalizadosTab,
+    EventosAtivosTab
     
   
     
@@ -41,11 +48,18 @@ import { BrMaskerModule } from 'brmasker-ionic-3';
   entryComponents: [
     MyApp,   
     Tab1 ,
-    Tab2
+    Tab2,
+    TodosEventosTab,
+    EventosFinalizadosTab,
+    EventosAtivosTab
     
     
   ],
   providers: [
+    {
+      provide: LOCALE_ID,
+      useValue: "en-US"
+    },
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},

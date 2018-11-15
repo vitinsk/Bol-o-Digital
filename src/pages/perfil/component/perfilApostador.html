@@ -37,7 +37,7 @@
       <p>Nome: {{apostador.nome}}</p>
       <p>Email: {{apostador.email}}</p>
       <p>Contato: {{apostador.telefone}}</p>
-      <p>Saldo: R${{apostador.saldo}},00</p>
+      <p>Saldo: {{apostador.saldo | currency:'BRL':true}}</p>
       <hr>
     
     </ion-card-content>

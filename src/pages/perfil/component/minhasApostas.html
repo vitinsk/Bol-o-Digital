@@ -11,12 +11,9 @@
   
   </ion-card>
   <ion-list>
-    <button ion-item *ngFor="let aposta of apostas">
-      <br>
+    <div class="lista-aposta" *ngFor="let aposta of apostas"> 
       
-      <h3>Evento: {{aposta.eventos.id}}</h3>
-      <h3>Status: {{aposta.eventos.status}} </h3>
-      <h2>Aposta nº: {{aposta.id}}</h2>
+      <span>Aposta nº: {{aposta.id}}</span>
       
       <div class="numeros">
         <ul>   
@@ -30,8 +27,8 @@
         </ul>
       </div> 
       Acertos: {{aposta.acertos}}
-    
-    </button>
+    <hr>
+    </div>
   </ion-list>
 
 </ion-content>

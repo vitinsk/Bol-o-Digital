@@ -101,8 +101,8 @@ export class ApostasPage {
       this.evento = response
       this.mostrarBotao(this.evento);
       this.loadResultado(this.evento)
-      this.evento.vlrLiquido = this.valor(this.evento.vlrLiquido);
-      this.evento.vlrParticipacao = this.valor(this.evento.vlrParticipacao); 
+ /*      this.evento.vlrLiquido = this.valor(this.evento.vlrLiquido);
+      this.evento.vlrParticipacao = this.valor(this.evento.vlrParticipacao);  */
     })
   }
   

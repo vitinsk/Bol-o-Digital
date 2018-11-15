@@ -25,12 +25,12 @@
         <th>Taxa de Entrada</th>
 
         <tr>
-          <td>{{evento.vlrLiquido}}</td>
-          <td>{{evento.vlrParticipacao}}</td>
+          <td>{{evento.vlrLiquido | currency:'BRL':true}}</td>
+          <td>{{evento.vlrParticipacao | currency:'BRL':true}}</td>
         </tr>
       </table>
 <br>
-      <h1 *ngIf="apostador" style="color: green">Saldo: R$ {{apostador.saldo}},00</h1>
+      <h1 *ngIf="apostador" style="color: green">Saldo: {{apostador.saldo | currency:'BRL':true}}</h1>
     </div>
 
   </ion-item>
@@ -68,13 +68,13 @@
     </ion-row>
   </ion-grid>
 
-  <div class="verTudo" (click)="todasApostas(evento.id)">    
-    <img src="../../assets/icon/globe-grid (2).png" alt="">
-    <p style="margin-top: -8px;">Pressione para</p>
-    <p style="margin-top: -18px;">ver todas apostas</p>
+  <div class="verTodas" (click)="todasApostas(evento.id)">    
+    <!-- <img src="../../assets/icon/globe-grid (2).png" alt=""> -->
+    <span>Ver todas as apostas</span>
+    <ion-icon class="icon-VerTudo" ios="ios-arrow-dropright-circle" md="md-arrow-dropright-circle"></ion-icon>
   </div>
 
-
+<hr>
   <div class="minhasApostas">
   
       <h2>Minhas Apostas</h2>

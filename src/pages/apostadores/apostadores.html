@@ -15,6 +15,9 @@
 
 
 <ion-content padding>
+    <ion-searchbar
+  >
+  </ion-searchbar>
     <ion-list>
 
         <ion-item  *ngFor="let apostadores of apostador">
@@ -23,12 +26,17 @@
               <ion-icon ios="ios-person" md="md-person"></ion-icon>
           </ion-avatar> --> 
           
+
           <h3>Nome: {{apostadores.nome}}</h3>
-          <h3>Email:{{apostadores.email}}</h3>
-          <a end (click)="addSaldo(apostadores)"> </a>
-          <h3>Saldo: R${{apostadores.saldo}}</h3>
+          <h3>Email:{{apostadores.email}}</h3><!-- 
+          <a end (click)="addSaldo(apostadores)"> </a> -->
+          <h3>Saldo: {{apostadores.saldo | currency:'BRL':true}}</h3>
           <div style="margin-left: 1px">
-            
+              <div class="icones">
+                  <ion-icon (click)="addSaldo(apostadores)" ios="logo-usd" md="logo-usd"></ion-icon>
+                  <ion-icon ios="ios-remove-circle" md="md-remove-circle"></ion-icon>
+                  <ion-icon ios="ios-trash" md="md-trash"></ion-icon>
+                 </div>  
                    <!--  <ion-buttons>
                         <button ion-button icon-only clear (click)="addSaldo(apostadores)">
                            

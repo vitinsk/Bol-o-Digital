@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController} from 'ionic-angular';
 import { EventoProvider } from '../../providers/evento/evento';
 import { STORAGE_KEYS } from '../../config/storage_keys.config';
+import { TodosEventosTab } from './tabs/todosEventosTab';
+import { EventosFinalizadosTab } from './tabs/eventos-finalizados/eventos-finalizados';
+import { EventosAtivosTab } from './tabs/eventos-ativos/eventos-ativos';
 
 
 @IonicPage()
@@ -12,9 +15,13 @@ import { STORAGE_KEYS } from '../../config/storage_keys.config';
 export class EventoPage {
 
   eventos: any[];
-
+  todosEventosTab: any;
+  eventosFinalizadosTab: any;
+  eventosAtivosTab: any;
   constructor(public navCtrl: NavController,public service: EventoProvider) {
-   
+this.todosEventosTab = TodosEventosTab;
+this.eventosFinalizadosTab = EventosFinalizadosTab;
+this.eventosAtivosTab = EventosAtivosTab;
   }
 
   ionViewDidEnter(){
