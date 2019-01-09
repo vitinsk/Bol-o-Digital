@@ -1,8 +1,5 @@
 <ion-content>
 <br>
-<br>
-<br>
-<br>
 <ion-card  *ngIf="administrador">
   <ion-card-header>
       <ion-icon ios="ios-pie" md="md-pie"></ion-icon>
@@ -14,16 +11,20 @@
       <ion-icon name="md-clipboard" item-start></ion-icon>
       Eventos
     </button>
+  
+
     <button ion-item (click)="apostadores()">
       <ion-icon name="md-contacts" item-start></ion-icon>
       Apostadores
     </button>
+    <button ion-item (click)="captador()">
+        <ion-icon ios="ios-body" md="md-body" item-start></ion-icon>
+        Captadores
+      </button>
     <button ion-item (click)="relatorio()">
       <ion-icon name="md-calculator" item-start></ion-icon>
       Estatisticas
     </button>
-
-
   </ion-list>
 </ion-card>
 

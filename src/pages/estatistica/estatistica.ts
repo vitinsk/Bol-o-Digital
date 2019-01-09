@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Receita } from '../../models/receita';
 import { AdminProvider } from '../../providers/admin/admin';
 
+
 /**
  * Generated class for the EstatisticaPage page.
  *
@@ -19,6 +20,12 @@ export class EstatisticaPage {
 
   receita : Receita;
   constructor(public navCtrl: NavController, public navParams: NavParams, public adminService: AdminProvider) {
+  }
+
+  display: boolean = false;
+
+  showDialog() {
+      this.display = true;
   }
 
   ionViewDidLoad() {

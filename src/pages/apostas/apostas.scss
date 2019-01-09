@@ -28,6 +28,12 @@ page-apostas {
         
     }
 
+    .concursos{
+        width: 100%;
+        font-size: 15px;
+        text-align: center;
+    }
+
     .menu .cabecalho table{
        width: 100%;
        font-size: 15px;
@@ -62,6 +68,34 @@ page-apostas {
 
   }
 
+  .sorteioEvento{
+    margin-left: 3px;
+     border: 1px solid red;
+     width: 15%;
+     display: grid;
+     float: left;
+    
+   
+     
+  }
+  .sorteioEvento span{
+      text-align: center;
+      border: 1px solid white;
+      width: 100%;
+      font-size: 15px;
+  
+      background-color: red;
+      color: white;      
+  }
+  .sorteioEvento ul{
+    list-style-type: none;
+    margin: 0;
+    padding:0;
+    text-align: center;
+     
+  }
+
+
   .icon-VerTudo{
       font-size: 45px;
   }
@@ -71,6 +105,10 @@ page-apostas {
       text-align: center;
       color: white;
       border-radius: 35px;
+  }
+
+  #grafico-apostas{
+   width: 10px;
   }
 
   .verTodas span{

@@ -1,0 +1,32 @@
+lista-aposta {
+    .lista-aposta{
+        text-align: center;  
+  
+  
+    }
+
+    .numeros li{
+        display: inline-block;
+        margin: 0 8px 6px 0;   
+        font-size: 1.5rem;
+        color: #fff;
+        background: red;
+        border-radius: 35px;
+        width: 28px;
+        height: 28px;
+        padding: 3px 0;
+        text-align: center;
+        }
+
+        .acertados li {
+            background: green;
+        }
+    
+
+
+ion-card{
+    text-align: center;
+   
+   }
+    
+}

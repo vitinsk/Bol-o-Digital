@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, MenuController, ViewController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController, ViewController, AlertController, LoadingController } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ApostadorProvider } from '../../providers/apostador/apostador';
 import { HttpErrorResponse } from '@angular/common/http';
-
+import { CaptadorProvider } from '../../providers/captador/captador';
+import { Captador } from '../../models/captador';
 /**
  * Generated class for the SignupPage page.
  *
@@ -20,6 +21,7 @@ export class SignupPage {
 
   ErrorMsg: any;
   formGroup : FormGroup;
+  captador : Captador[];
 
   constructor(public navCtrl: NavController,
   public navParams: NavParams,
@@ -27,27 +29,28 @@ export class SignupPage {
   public view: ViewController,
   public alertCtrl: AlertController,
   formBuilder : FormBuilder,
-  public apostadorService: ApostadorProvider) {
+  public apostadorService: ApostadorProvider,
+  public captadorService : CaptadorProvider,
+public loadingCtrl: LoadingController) {
 
     this.formGroup = formBuilder.group({
       nome: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(120)]],
       telefone: ['', [Validators.required]],
+      captador:[],
       email: ['', [Validators.required, Validators.email]],    
       senha: ['', [Validators.required]]  
-      /*
-      nome: ['Joaquim', [Validators.required, Validators.minLength(5), Validators.maxLength(120)]],
-      telefone: ['977261827', [Validators.required]],
-      email: ['joaquim@gmail.com', [Validators.required, Validators.email]],    
-      senha: ['123', [Validators.required]]  
-      */ 
-     
-   
     });
 }
   
+  loadCaptador(){
+    this.captadorService.findAll().subscribe(response => {
+      this.captador = response;
+    })
+  }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SignupPage');
+    this.loadCaptador();
+   
   }
 
   ionViewWillEnter() {
@@ -60,14 +63,19 @@ export class SignupPage {
     }
 
     cadastrarApostador(){
-      
+      let loading = this.loadingCtrl.create({
+        content: 'Validando cadastro.'
+      });
+      loading.present();
       this.formGroup.value.email
       this.apostadorService.insert(this.formGroup.value)
       .subscribe(response => {
+        loading.dismiss();
         this.showInsertOk();
     
       },
     error => {
+      loading.dismiss();
       this.showError(error);
     });
     }
@@ -112,9 +120,5 @@ export class SignupPage {
       return msgErro;
       }
     }
-
-
-
-
 
 }

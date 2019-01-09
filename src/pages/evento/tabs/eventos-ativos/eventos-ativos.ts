@@ -7,6 +7,7 @@ import { STORAGE_KEYS } from '../../../../config/storage_keys.config';
 
 
 
+
 @Component({
   templateUrl: 'eventos-ativos.html',
 })
@@ -15,6 +16,12 @@ export class EventosAtivosTab {
   eventos: any[]; 
   constructor(public navCtrl: NavController,public service: EventoProvider) {
 
+  }
+
+  display: boolean = false;
+
+  showDialog() {
+      this.display = true;
   }
 
   ionViewDidEnter(){

@@ -8,6 +8,8 @@ import { EstatisticaPage } from './estatistica';
   ],
   imports: [
     IonicPageModule.forChild(EstatisticaPage),
+  
+  
   ],
 })
 export class EstatisticaPageModule {}

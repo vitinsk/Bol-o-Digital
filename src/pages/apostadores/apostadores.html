@@ -15,41 +15,40 @@
 
 
 <ion-content padding>
-    <ion-searchbar
-  >
-  </ion-searchbar>
-    <ion-list>
-
+    <ion-searchbar placeholder="Buscar" showCancelButton="true" type="text" autocomplete="on" (ionInput)="getItems($event)"></ion-searchbar>
+   
         <ion-item  *ngFor="let apostadores of apostador">
-          <br>
-              <!--  <ion-avatar item-start>
-              <ion-icon ios="ios-person" md="md-person"></ion-icon>
-          </ion-avatar> --> 
-          
 
           <h3>Nome: {{apostadores.nome}}</h3>
           <h3>Email:{{apostadores.email}}</h3><!-- 
           <a end (click)="addSaldo(apostadores)"> </a> -->
           <h3>Saldo: {{apostadores.saldo | currency:'BRL':true}}</h3>
-          <div style="margin-left: 1px">
+          <div>
+            <!--
               <div class="icones">
-                  <ion-icon (click)="addSaldo(apostadores)" ios="logo-usd" md="logo-usd"></ion-icon>
-                  <ion-icon ios="ios-remove-circle" md="md-remove-circle"></ion-icon>
-                  <ion-icon ios="ios-trash" md="md-trash"></ion-icon>
+                  
+                  <ion-icon style="color: green;" (click)="addSaldo(apostadores)" ios="logo-usd" md="logo-usd"></ion-icon>
+                  <ion-icon name="contacts" (click)="addCaptador(apostadores)"></ion-icon>
+                  <ion-icon style="color: red;" ios="ios-remove-circle" md="md-remove-circle"></ion-icon>
+                  <ion-icon style="color: red;" ios="ios-trash" md="md-trash"></ion-icon>
                  </div>  
-                   <!--  <ion-buttons>
-                        <button ion-button icon-only clear (click)="addSaldo(apostadores)">
-                           
-                           <ion-icon name="add"></ion-icon>
-                                <ion-icon ios="logo-usd" md="logo-usd"></ion-icon>
-                               
-                    </button>
-                      </ion-buttons>
-          -->     
-          <br>   
+                 -->
+                 <ion-fab class="menufab">
+                        <button class="btn-fab" ion-fab mini color="light"><ion-icon id="icon-fab" name="md-menu"></ion-icon></button>
+                        <ion-fab-list side="right">
+                          <button ion-fab (click)="addSaldo(apostadores)"><ion-icon style="color: green;"  ios="logo-usd" md="logo-usd"></ion-icon></button>
+                          <a href="{{mostrar(apostadores.nome, apostadores.telefone)}}"><button ion-fab><ion-icon style="color: green;" name="logo-whatsapp"></ion-icon></button></a>
+                          <button ion-fab  (click)="addCaptador(apostadores)"><ion-icon name="contacts"></ion-icon></button> 
+                         
+                          <button ion-fab><ion-icon style="color: red;" ios="ios-trash" md="md-trash"></ion-icon></button>
+                        </ion-fab-list>
+                      </ion-fab>
+
+          <br>  
+          <br> 
+      
         </div>
+
         </ion-item>
-
-      </ion-list>
-
+ 
 </ion-content>

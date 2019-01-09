@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component} from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, ModalController, ToastController} from 'ionic-angular';
 import { ApostasProvider } from '../../providers/apostas/apostas';
 import { EventoProvider } from '../../providers/evento/evento';
@@ -8,9 +8,12 @@ import { BrMaskerIonicServices3 } from 'brmasker-ionic-3';
 import { ApostadorProvider } from '../../providers/apostador/apostador';
 import { ApostadorDTO } from '../../models/apostador.dto';
 import { StorageProvider } from '../../providers/storage/storage';
+import { CaixaProvider } from '../../providers/caixa/caixa';
+import { Caixa } from '../../models/caixa';
 
 
 @IonicPage()
+
 @Component({
   selector: 'page-apostas',
   templateUrl: 'apostas.html',
@@ -18,6 +21,7 @@ import { StorageProvider } from '../../providers/storage/storage';
 export class ApostasPage {
  
   apostas: Aposta[]; 
+  caixa : Caixa[];
   apostador: ApostadorDTO;
   evento: any;
   num = [];
@@ -27,6 +31,10 @@ export class ApostasPage {
   txt_btn_apostar = false;
   txt_msg_apostar : string;
   ab = 12681308690;
+  proximoConcurso: Date;
+
+  numerosLoteria = [];
+
 
   metodos = new Metodos;
 
@@ -36,10 +44,12 @@ export class ApostasPage {
       public apostaService: ApostasProvider,
       public eventoService: EventoProvider,
       public apostadorService: ApostadorProvider,
+      public caixaService: CaixaProvider,
       public modalCtrl: ModalController,
     public toastCtrl: ToastController,
     public storage: StorageProvider,
     public brMasker: BrMaskerIonicServices3) {
+
   }
 
   ionViewDidEnter(){
@@ -54,6 +64,8 @@ export class ApostasPage {
     this.loadApostas();
     this.loadApostador(event); 
     this.loadEventoInfo(); 
+    this.proximoConcurso = null;
+    this.loadCaixa();
     
   }
 
@@ -81,6 +93,23 @@ export class ApostasPage {
   }
   }
 
+  loadCaixa(){
+    let evento_id = this.navParams.get('evento_id');
+    this.caixaService.findByEvento(evento_id).subscribe(response => {
+      this.caixa = response;
+      for (let i = 0; i <response.length; i++) {
+        this.caixa[i].resultado = this.metodos.passaParaArray(response[i].resultado.toString());   
+     
+      };  
+      if (response.length > 0) {
+        this.proximoConcurso = this.caixa[this.caixa.length - 1].dataProximoConcurso;
+      }
+      
+      }
+    );
+    }
+  
+
   loadApostas(){
     let evento_id = this.navParams.get('evento_id');
     this.apostaService.findByEmailAndEvento(this.storage.getLocalUser().email, evento_id).subscribe(response => {
@@ -91,7 +120,7 @@ export class ApostasPage {
           this.apostas[i].numeros_acertados = this.metodos.passaParaArray(response[i].numeros_acertados.toString());  
         }           
       }     
-    
+     
     })
   }
 

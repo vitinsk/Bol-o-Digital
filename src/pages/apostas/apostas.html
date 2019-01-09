@@ -8,15 +8,54 @@
 
 
 <ion-content padding class="page-apostas">
+    <p-fieldset legend="Ultimos Resultados" [toggleable]="true" *ngIf="caixa">
+      <ion-grid>
+        <ion-row text-center>
+          <ion-col *ngFor="let cx of caixa" class="sorteioEvento">
+             
+                  <span>{{cx.concurso}}</span>
+                  <ul>
+                      <li *ngFor="let numeros of cx.resultado">{{numeros}}</li>  
+                    </ul>
+               
+          </ion-col>
   
+
+
+        </ion-row>
+      </ion-grid>
+    </p-fieldset>
+<!-- 
+    <p-fieldset legend="Ultimos Resultados" [toggleable]="true">
+      <div *ngIf="caixa" class="concursos">
+ 
+        <div *ngFor="let cx of caixa" class="sorteioEvento">
+            <span>{{cx.concurso}}</span>
+            <ul>
+                <li *ngFor="let numeros of cx.resultado">{{numeros}}</li>  
+              </ul>
+          </div>
+  
+    </div>
+    </p-fieldset>
+ -->
+
+ 
 
     <button class="btn-ganhador" ion-button color="default" *ngIf="ganhadorOn" (click)="mostrarResultado(evento)" round>Ganhadores</button>
   <ion-item class="menu"*ngIf="evento"> 
+
+    
     <div class="cabecalho">
-      <h2>Numeros Sorteados</h2>
+        <div *ngIf="caixa">
+            <h4 *ngIf="!ganhadorOn">Proximo Sorteio: {{proximoConcurso}}</h4>
+        </div>
+      
+        <h2 *ngIf="ganhadorOn" style="color: red">Evento Finalizado</h2>
+<!--       <h2>Numeros Sorteados</h2>
       <div id="num">
       <span text-wrap>{{evento.numeroSorteadoLoteria}}</span>
-    </div>
+    </div> -->
       <h2>Total de Apostas:</h2>
       <h1>{{evento.qtdApostas}}</h1>
      
@@ -81,6 +120,7 @@
       <h1 *ngIf="!apostas" style="color: red">Você não possui apostas</h1>
     </div>
 
+    <!--
   <ion-list>
     <div class="lista-aposta" ion-item *ngFor="let aposta of apostas" (click)="abrirModal(aposta)">
       <h2>Aposta nº: {{aposta.id}} Acertos: {{aposta.acertos}}</h2>
@@ -101,5 +141,7 @@
       <h4>Pressione para ver mais detalhes</h4>
     </div>
   </ion-list>
+-->
 
+<lista-aposta *ngIf="apostas" [listaApostas]="apostas"></lista-aposta>
 </ion-content>

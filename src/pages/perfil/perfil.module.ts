@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { PerfilPage } from './perfil';
+import { ComponentsModule } from '../../components/components.module';
 
 
 @NgModule({
@@ -10,7 +11,7 @@ import { PerfilPage } from './perfil';
   ],
   imports: [
     IonicPageModule.forChild(PerfilPage),
-    
+    ComponentsModule, 
     
   ],
   entryComponents: [

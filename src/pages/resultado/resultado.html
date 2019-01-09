@@ -17,14 +17,14 @@
  
     <ion-card style="text-align: center;" *ngFor="let apt of resultado">
         <ion-card-header>
-          <h1>Ganhador: {{apt.nome}}</h1>  
+          <h1>{{apt.nome}}</h1>  
 
           <hr>      
         </ion-card-header>
         <ion-card-content>
             <h2>Numeros Apostados </h2>
               <h2>{{apt.numeros_acertados}}</h2>
-            <h1>Valor do Prêmio: {{apt.valorPremio | currency:'BRL':true}} </h1>
+            <h1>Prêmio: {{apt.valorPremio | currency:'BRL':true}} </h1>
         </ion-card-content>
       </ion-card>
 </ion-content>

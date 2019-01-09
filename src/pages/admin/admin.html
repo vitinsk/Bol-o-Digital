@@ -9,81 +9,53 @@
   <ion-navbar>
     <ion-title>Administrar</ion-title>
     <ion-buttons end>
+      
         <button ion-button (click)="voltar()">Voltar</button>
       </ion-buttons>
   </ion-navbar>
 
 </ion-header>
-
-<!--
-<ion-content padding>
-
-  <ion-list *ngIf="evento">    
-      <hr> 
-      <h2>Evento: {{evento.id}}</h2>
-      <h1>Status: {{evento.status}}</h1>
-   
-      <button ion-button (click)="ativar(evento.id)">Ativar</button>
-      <hr>
-  </ion-list>
-
-  <button ion-button (click)="sincronizar()">Sincronizar</button>
-</ion-content>
--->
-
 <ion-content class="container transparent-header">
-
-    <div class="card-profile">
-     
-   
-     <br>
-    
-      <hr>
+    <ion-card>
+        <ion-card-header>
+            <ion-icon ios="ios-pie" md="md-pie"></ion-icon>
+          Eventos
+        </ion-card-header>
       
-      <div class="card-profile_user-stats">
-        <div class="stats-holder" *ngIf="evento">
-          <div class="user-stats">
-            <strong>Evento</strong>
-            <P>{{evento.id}}</P>
-          </div>
-          <div class="user-stats">
-            <strong>Status</strong>
-            <P>{{evento.status}}</P>
-          </div> 
-     
-        </div>
-     
-      </div>
+        <ion-list>
+          <button ion-item (click)="abrirModalCriarEvento()">
+            <ion-icon name="md-clipboard" item-start></ion-icon>
+            Novo Evento
+          </button>
+          <hr>
+          <button ion-item (click)="abrirModalCriarParametro()">             
+              <ion-icon ios="ios-options" md="md-options" item-start></ion-icon>
+              Parâmetros Evento
+            </button>
+<hr>
+            <button ion-item (click)="sincronizar()">
+                <ion-icon ios="ios-sync" md="md-sync" item-start></ion-icon>
+               Sincronizar
+              </button>
+      
+        </ion-list>
+      </ion-card>
+   
 
-      <div class="card-profile_user-stats">
-          <div class="stats-holder" *ngIf="evento">
-            <div class="user-stats">
-              <strong>Ativar</strong>
-              <button ion-button (click)="ativar(evento.id)">Ativar</button>
-            </div>    
-       
-       
+    <ion-list>
+        <ion-item *ngFor="let evento of eventos">
+          <div class="evento">
+            <h2>Evento: {{evento.id}}</h2>
+            <h2 style="color: green">Status: {{evento.status}}</h2>
+            <h2>Jogo: {{evento.tipoJogo.tipoJogo}}</h2>   
+            <button ion-button (click)="ativar(evento.id)">Ativar</button> 
+            <button ion-button (click)="editar(evento.id)">Editar</button>
+            <button ion-button (click)="desativar(evento.id)">Desativar</button>                
           </div>
-        
-        </div>
-
-        <div class="card-profile_user-stats">
-            <div class="stats-holder">           
-              <div class="user-stats">
-                <strong>Sincronizar</strong>
-                <button ion-button (click)="sincronizar()">Sincronizar</button>
-              </div>
-         
-         
-            </div>
-       
-          </div>
-
-  
-      </div>
-  
-    
-  
+          
+        </ion-item>
+             
+      </ion-list>
    
   </ion-content>
 

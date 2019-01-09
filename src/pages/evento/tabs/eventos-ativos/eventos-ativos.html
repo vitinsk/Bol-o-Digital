@@ -16,6 +16,7 @@
       </ion-header>
       
       <ion-content padding>
+
 <h1 *ngIf="!msg">Não existe eventos em andamento...</h1>
       
       <ion-list>
@@ -23,8 +24,8 @@
           <div class="evento">
             <h2>Evento: {{evento.id}}</h2>
             <h2 style="color: green">Status: {{evento.status}}</h2>
-            <h4>Pressione aqui para visualizar.</h4>
-      
+            <h2>Jogo: {{evento.tipoJogo.tipoJogo}}</h2>
+            <h4>Pressione aqui para visualizar.</h4>      
           </div>
         </button>
       

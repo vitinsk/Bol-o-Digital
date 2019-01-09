@@ -1,6 +1,7 @@
 import { Component} from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController} from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, ModalController} from 'ionic-angular';
 import { EventoProvider } from '../../providers/evento/evento';
+import { Evento } from '../../models/evento';
 
 /**
  * Generated class for the AdminPage page.
@@ -16,27 +17,29 @@ import { EventoProvider } from '../../providers/evento/evento';
 })
 export class AdminPage {
 
-  evento: any;
+  eventos: Evento[];
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public eventoService: EventoProvider,
-              public alertCtrl: AlertController) {
+              public alertCtrl: AlertController,
+              public modalCtrl : ModalController) {
   }
 
-  ionViewDidLoad() {
+  ionViewDidEnter() {
     this.findInativo();
+    console.log(this.eventos);
   }
 
 
   findInativo(){
-    this.eventoService.findInativo().subscribe(
-      response => {
-        this.evento = response;
-      }
-    )
+    this.eventoService.findInativo().subscribe(response => {
+      this.eventos = response;
+      console.log(response);
+    })
   }
 
   ativar(evento_id: string){
     this.eventoService.ativar(evento_id).subscribe(response => {
+      this.findInativo();
       this.showInsertOk(`O evento ${evento_id} foi ativo com Sucesso!!`);
     });
   }
@@ -87,4 +90,24 @@ export class AdminPage {
     this.navCtrl.pop();
   }
 
+  abrirModalCriarEvento() {
+    let modalAposta = this.modalCtrl.create('CriarEventoPage');
+    modalAposta.present();
+  }
+  abrirModalCriarParametro() {
+    let modalAposta = this.modalCtrl.create('ParametroPage');
+    modalAposta.present();
+  }
+
+
+  desativar(evento_id){
+    this.eventoService.desativar(evento_id).subscribe(response => {
+      this.findInativo();
+      this.showInsertOk(`O evento ${evento_id} foi desativado com Sucesso!!`);
+    });
+  }
+
+  editar(evento_id){
+
+  }
 }

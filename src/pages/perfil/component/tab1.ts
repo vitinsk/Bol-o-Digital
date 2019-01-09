@@ -51,6 +51,12 @@ administrador = false;
         
     }
 
+    captador(){
+        let captador = this.modalCtrl.create('CaptadoresPage');
+        captador.present();
+        
+    }
+
       
 
 

@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, MenuController, ModalController, A
 import { CredenciaisDTO } from '../../models/credenciais.dto';
 import { AuthProvider } from '../../providers/auth/auth';
 import { HttpErrorResponse } from '@angular/common/http';
+import { MessageService } from 'primeng/components/common/messageservice';
 
 /**
  * Generated class for the LoginPage page.
@@ -28,15 +29,23 @@ export class LoginPage {
     public modalCtrl: ModalController,
     public auth: AuthProvider,
   public alertCtrl: AlertController,
-public loadingCtrl: LoadingController) {
+public loadingCtrl: LoadingController,
+public messageService : MessageService) {
   }
 
+  showSuccess() {
+    this.messageService.add({key: 'myKey1', severity:'success', summary: 'Summary Text', detail: 'Detail Text'});
+}
+
   ionViewDidLeave() {
+  
     this.menu.swipeEnable(true);
     }
 
 
     ionViewDidEnter(){
+   
+ 
       this.menu.swipeEnable(false);
       this.auth.refreshToken()
       .subscribe(response =>{     

@@ -7,13 +7,14 @@ import { EventosFinalizadosTab } from './tabs/eventos-finalizados/eventos-finali
 import { EventosAtivosTab } from './tabs/eventos-ativos/eventos-ativos';
 
 
+
 @IonicPage()
 @Component({
   selector: 'page-evento',
   templateUrl: 'evento.html',
 })
 export class EventoPage {
-
+  data: any;
   eventos: any[];
   todosEventosTab: any;
   eventosFinalizadosTab: any;
@@ -22,6 +23,8 @@ export class EventoPage {
 this.todosEventosTab = TodosEventosTab;
 this.eventosFinalizadosTab = EventosFinalizadosTab;
 this.eventosAtivosTab = EventosAtivosTab;
+
+
   }
 
   ionViewDidEnter(){

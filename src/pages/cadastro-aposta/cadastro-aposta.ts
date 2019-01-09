@@ -4,6 +4,7 @@ import { ApostadorProvider } from '../../providers/apostador/apostador';
 import { Apostar } from '../../models/apostar';
 import { ApostasProvider } from '../../providers/apostas/apostas';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Evento } from '../../models/evento';
 
 @IonicPage()
 @Component({
@@ -38,12 +39,13 @@ export class CadastroApostaPage {
       this.navCtrl.setRoot('EventoPage')
       return null;
     }
-    this.geradorDeNumeros();
+    
+    this.geradorDeNumeros(this.evento);
   }
 
-  selecionarNumero(numero) {
+  selecionarNumero(numero, evento : Evento) {
     
-    if (this.selecionado.length < 6) {
+    if (this.selecionado.length < evento.tipoJogo.qtdApostar) {
       this.mudaCorNumero(numero);
 
       if (this.selecionado.indexOf(numero) != -1) {     
@@ -59,7 +61,7 @@ export class CadastroApostaPage {
       this.numeroString = this.selecionado.join('-');
     } else {
       const a = document.getElementById(numero);
-      if (this.selecionado.length == 6 && a.className == "vermelho") {
+      if (this.selecionado.length == evento.tipoJogo.qtdApostar && a.className == "vermelho") {
         this.mudaCorNumero(numero);
       }
       this.removerPorIndice(numero);
@@ -67,7 +69,7 @@ export class CadastroApostaPage {
 
 
     }
-    this.mostrarBotaoApostar(this.selecionado);
+    this.mostrarBotaoApostar(this.selecionado, evento);
   }
   removerPorIndice(numero) {
     if (this.selecionado.indexOf(numero) != -1) {
@@ -87,8 +89,8 @@ export class CadastroApostaPage {
 
   }
 
-  geradorDeNumeros() {
-    for (let i = 1; i <= 60; i++) {
+  geradorDeNumeros(evento : Evento) {
+    for (let i = 1; i <= evento.tipoJogo.totalApostar; i++) {
       if (i <= 9) {
         this.numeros.push('0' + i);
       } else {
@@ -103,8 +105,8 @@ export class CadastroApostaPage {
   }
 
 
-  mostrarBotaoApostar(dados){
-    if(dados.length == 6){
+  mostrarBotaoApostar(dados, evento : Evento){
+    if(dados.length == evento.tipoJogo.qtdApostar){
       this.botaoApostar = true;
     }else{
       this.botaoApostar = false;
@@ -135,7 +137,7 @@ export class CadastroApostaPage {
           this.showInsertOk();
         },
         error =>{
-          
+          loading.dismiss();
           this.showError(error);
         }
         

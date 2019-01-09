@@ -1,5 +1,8 @@
 page-apostadores {
-    a {
+  a{
+    color: green;
+  }
+    b {
         width: 40px;
         height: 40px;
         position: absolute;
@@ -53,9 +56,24 @@ page-apostadores {
         text-align: center;
       }
 
-      ion-icon{
-        
+      .ion-icon{        
         padding-left: 25px;
         padding-right: 5px;
       }
+
+      .menufab{               
+        
+        margin-left: 15px;
+        margin-top: -10px;
+
+    }
+    .menufab .btn-fab{
+      width: 35px;
+      height: 35px;;
+    }
+    .menufab .btn-fab #icon-fab{
+      text-align: center;
+      color: red;
+      font-size: 15px;
+    }
 }

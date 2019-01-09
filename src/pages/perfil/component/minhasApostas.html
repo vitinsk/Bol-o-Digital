@@ -1,4 +1,5 @@
 <ion-content>
+  <!--
 <ion-card>
     <ion-card-header>
       Minhas Apostas
@@ -30,5 +31,36 @@
     <hr>
     </div>
   </ion-list>
+-->
+
+
+
+<ion-list *ngFor="let aposta of apostas">
+    <ion-card>
+        <ion-card-header>
+         Evento:  {{aposta.evento.id}}
+        </ion-card-header>
+      <hr>
+        <ion-card-content>
+            <h3>Numeros Apostados</h3>
+            <div class="numeros">
+              <ul>   
+                <li *ngFor="let numeros of aposta.numero_apostado">{{numeros}}</li> 
+              </ul>
+            </div> 
+            <hr>
+            <h3>Numeros Acertados</h3>
+            <div class="numeros acertados">
+              <ul> 
+                <li *ngFor="let numeros of aposta.numeros_acertados">{{numeros}}</li> 
+              </ul>
+            </div> 
+            <hr>
+            <h4>Total de Acertos: {{aposta.acertos}}</h4>
+        </ion-card-content>
+      
+      </ion-card>
+    </ion-list>
+    
 
 </ion-content>

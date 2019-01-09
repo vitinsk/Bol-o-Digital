@@ -22,6 +22,14 @@ import { TodosEventosTab } from '../pages/evento/tabs/todosEventosTab';
 import { EventosFinalizadosTab } from '../pages/evento/tabs/eventos-finalizados/eventos-finalizados';
 import { EventosAtivosTab } from '../pages/evento/tabs/eventos-ativos/eventos-ativos';
 import {LOCALE_ID} from '@angular/core';
+import {ChartsModule} from 'ng2-charts';
+import { CaixaProvider } from '../providers/caixa/caixa';
+import {DialogModule} from 'primeng/dialog';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { MessageService } from 'primeng/components/common/messageservice';
+import { CaptadorProvider } from '../providers/captador/captador';
+import { ParametroProvider } from '../providers/parametro/parametro';
+
 
 
 
@@ -40,9 +48,14 @@ import {LOCALE_ID} from '@angular/core';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     IonicModule.forRoot(MyApp),
-    BrMaskerModule
+    BrMaskerModule,
+    ChartsModule,
+    DialogModule,
+    
+    
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -51,7 +64,8 @@ import {LOCALE_ID} from '@angular/core';
     Tab2,
     TodosEventosTab,
     EventosFinalizadosTab,
-    EventosAtivosTab
+    EventosAtivosTab,
+    
     
     
   ],
@@ -70,7 +84,12 @@ import {LOCALE_ID} from '@angular/core';
     AuthProvider,
     AuthInterceptorProvider,
     ResultadoProvider,
-    AdminProvider
+    AdminProvider,
+    CaixaProvider,
+    MessageService,
+    CaptadorProvider,
+    CaptadorProvider,
+    ParametroProvider
   ]
 })
 export class AppModule {}

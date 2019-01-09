@@ -17,6 +17,8 @@
 
 
 <ion-content padding>
+
+  
   <form [formGroup]="formGroup" (ngSubmit)="cadastrarApostador(); $event.preventDefault()">
     <ion-item>
       <ion-label stacked>Nome*</ion-label>
@@ -28,12 +30,22 @@
       <ion-input formControlName="telefone" type="text" name="phone" placeholder="(31) 00000-0000" [brmasker]="{phone: true}"></ion-input>
     </ion-item>
 
-    
+    <ion-list>
+        <ion-item> 
+        <ion-label>Indicação</ion-label>
+                 
+          <ion-select formControlName="captador">
+            <ion-option *ngFor="let cap of captador"
+            value="{{cap.id}}">{{cap.nome}}</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
 
     <ion-item>
       <ion-label stacked>Email*</ion-label>
       <ion-input formControlName="email" type="text"></ion-input>
     </ion-item>
+
 
     <ion-item>
       <ion-label stacked>Senha*</ion-label>
@@ -41,4 +53,7 @@
     </ion-item>
     <button ion-button block type="submit">Criar conta</button>
   </form>
+
+
+  
 </ion-content>

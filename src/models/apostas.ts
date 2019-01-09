@@ -1,7 +1,7 @@
 export class Aposta  {
     id: string
     numero_apostado = [];
-    acertos: string;
+    acertos: number;
     tipoJogo: string;
     numeros_acertados = [];
 }
