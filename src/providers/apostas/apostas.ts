@@ -42,4 +42,12 @@ export class ApostasProvider {
       });
      
   }
+
+
+
+  gerarRelatorio(evento){
+    return this.http.get(
+      `${API_CONFIG.baseUrl}/relatorios/eventos/${evento}`);
+     
+  }
 }

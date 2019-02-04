@@ -15,6 +15,13 @@
 
 <ion-content padding>
 
+  <div class="download" *ngIf="mostrarPdf">
+  
+    <a [href]="urlPdf"  target="_blank">
+        <img end id="img-pdf" src="../../assets/imgs/pdf-logo.png" alt="">
+    <p strong>Gerar Relatório</p>
+  </a>   
+    </div>
   
   <div class="lista-aposta"  *ngIf="apostas">
     <h2>Total de Acertos</h2>
@@ -22,13 +29,6 @@
   </div>
    <hr>
 
-  <div *ngIf="false" class="download">
-  <a href="http://www.ufrgs.br/propesq1/documentos/instrucoespdf.pdf" target="_blank">
-      <img end id="img-pdf" src="../../assets/imgs/pdf-logo.png" alt="">
-  <p strong>Download PDF</p>
-</a>
-
-</div>
 
       <lista-aposta *ngIf="apostas" [listaApostas]="apostas"></lista-aposta>
 </ion-content>

@@ -1,13 +1,16 @@
 <ion-header>
-
+  
   <ion-navbar>
     <ion-title>Apostas</ion-title>
   </ion-navbar>
-
+  
 </ion-header>
 
 
 <ion-content padding class="page-apostas">
+    <button class="btn-ganhador" ion-button color="default" *ngIf="ganhadorOn" (click)="mostrarResultado(evento)" round>Ganhadores</button>
+    
+    
     <p-fieldset legend="Ultimos Resultados" [toggleable]="true" *ngIf="caixa">
       <ion-grid>
         <ion-row text-center>
@@ -42,7 +45,6 @@
 
  
 
-    <button class="btn-ganhador" ion-button color="default" *ngIf="ganhadorOn" (click)="mostrarResultado(evento)" round>Ganhadores</button>
   <ion-item class="menu"*ngIf="evento"> 
 
     
@@ -107,7 +109,7 @@
     </ion-row>
   </ion-grid>
 
-  <div class="verTodas" (click)="todasApostas(evento.id)">    
+  <div class="verTodas" (click)="todasApostas(evento)">    
     <!-- <img src="../../assets/icon/globe-grid (2).png" alt=""> -->
     <span>Ver todas as apostas</span>
     <ion-icon class="icon-VerTudo" ios="ios-arrow-dropright-circle" md="md-arrow-dropright-circle"></ion-icon>

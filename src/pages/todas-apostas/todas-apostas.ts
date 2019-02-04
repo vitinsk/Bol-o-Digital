@@ -3,7 +3,8 @@ import { IonicPage, NavController, NavParams, ModalController} from 'ionic-angul
 import { ApostasProvider } from '../../providers/apostas/apostas';
 import { Aposta } from '../../models/apostas';
 import { Metodos } from '../../utils/metodos';
-
+import { Evento } from '../../models/evento';
+import { API_CONFIG } from '../../config/api.config';
 /**
  * Generated class for the TodasApostasPage page.
  *
@@ -17,91 +18,117 @@ import { Metodos } from '../../utils/metodos';
   templateUrl: 'todas-apostas.html',
 })
 export class TodasApostasPage {
-  valor = [0,0,0,0,0,0];
+  valor = [];
   apostas: Aposta[]; 
   metodos = new Metodos;
   data: any;
+  labelDinamica = [];
+  corDinamica = [];
+  evento: any;
+  urlPdf : string;
+  mostrarPdf = false;
+
+  coresGrafico = ["#C0C0C0",
+  "#696969",
+  "#00BFFF",
+  "#90EE90",  
+  "#00FF00",
+  "#006400",
+  "#FF0000",
+  "#FF00FF",
+  "#DAA520",
+  "#FF4500",
+  "#FF8C00",
+  "#FFFF00",
+  "#B0E0E6",
+  "#B8860B",
+  "#7CFC00",];
+
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
-  public apostaService: ApostasProvider,
-public modalCtrl: ModalController) {
+    public apostaService: ApostasProvider,
+    public modalCtrl: ModalController,
+   
+   ) {
+
+      
   
 }
 
+ 
 
-montarGrafico(){  
+  
+
+distribuirVariaveisGrafico(evento : Evento){
+  for(let i=0; i<=evento.tipoJogo.qtdAcertar; i++){
+    this.labelDinamica.push(`${i}`);
+    this.corDinamica.push(this.coresGrafico[i]);
+  }
+}
+
+montarGrafico(evento : Evento){  
+  this.distribuirVariaveisGrafico(evento);
   this.data = {
-    labels: ['5','4','3','2','1','0'],
+    labels: this.labelDinamica,
     datasets: [
         {
-            data: [this.valor[0],this.valor[1],this.valor[2],this.valor[3],this.valor[4],this.valor[5]],
-            backgroundColor: [
-              "#008000",
-              "#00FF00",
-              "#00BFFF",  
-              "#FFD700",
-              "#FF0000"
-
-            ],
-            hoverBackgroundColor: [
-              "#008000",
-              "#00FF00",
-              "#00BFFF",  
-              "#FFD700",
-              "#FF0000"
-            ]
+            data: this.valor,
+            backgroundColor: this.corDinamica,
+            hoverBackgroundColor: this.corDinamica
         }]    
     };  
 }
 
 
-  ionViewDidLoad() {
-    let evento_id = this.navParams.get('evento');
-    console.log(evento_id)
+  ionViewDidEnter() {
+    
+    let evento = this.navParams.get('evento');
+    if(evento == null){
+      this.navCtrl.setRoot('EventoPage')
+      return null;
+    }
+    
+    this.evento = evento;
+    console.log(evento)
     this.loadApostas();
-  
+    this.urlPdf = `${API_CONFIG.baseUrl}/relatorios/eventos/${evento.id}`
+    this.exibirPDF(evento);
 
    
   }
+
+ 
 
   abrirModal(dados: any) {
     let modalAposta = this.modalCtrl.create('ModalApostaPage', {dados: dados});
     modalAposta.present();
   }
 
-  gerarGrafico(apostas : Array<Aposta>){
-    debugger;
-    for (let index = 0; index < apostas.length; index++) {
-      switch (apostas[index].acertos) {
-        case 5:  this.valor[0]++;
-        break;
-        case 4:  this.valor[1]++;
-        break;
-        case 3:  this.valor[2]++;
-        break;
-        case 2:  this.valor[3]++;
-        break;
-        case 1:  this.valor[4]++;
-        break;
-        case 0:  this.valor[5]++; 
-        break;
-        default:
-          break;
-      };      
-    };
-    console.log(this.valor);
+  montarGraficoDinamico(apostas : Array<Aposta>, evento : Evento){
+    for(let j = 0; j <= evento.tipoJogo.qtdAcertar; j++){
+      this.valor.push(0);
+    }
 
+    for(let i = 0; i < apostas.length; i++){
+      for(let j = 0; j <= evento.tipoJogo.qtdAcertar; j++){
+        switch (apostas[i].acertos){
+          case j : this.valor[j]++;
+        }
+      }
+    }
   }
 
- 
 
 
   loadApostas(){
-    let evento_id = this.navParams.get('evento');
-    this.apostaService.findByEvento(evento_id).subscribe(response => {
+    let evento = this.navParams.get('evento');    
+    this.apostaService.findByEvento(evento.id).subscribe(response => {
       this.apostas = response;
-      this.gerarGrafico(this.apostas);
-      this.montarGrafico(); 
+      this.montarGraficoDinamico(this.apostas, evento);
+      this.montarGrafico(evento); 
+      console.log(this.valor);
+      
+      console.log("DINAMICO")
       console.log(this.valor);
       for (let i = 0; i <response.length; i++) {
         this.apostas[i].numero_apostado = this.metodos.passaParaArray(response[i].numero_apostado.toString());  
@@ -111,6 +138,33 @@ montarGrafico(){
       }     
     
     })
+
+
   }
+
+  exibirPDF(evento){
+    if(evento.status == 'ATIVO' || evento.status == 'FINALIZADO'){
+      console.log("teste");
+      this.mostrarPdf = true;
+    }
+    else{
+      this.mostrarPdf = false;
+    }
+  }
+
+  gerarRelatorio(evento){
+    console.log(evento);
+    this.apostaService.gerarRelatorio(evento.id).subscribe(response => {
+    
+    },
+    error => {
+
+    })
+  }
+
+
+
+
+
 
 }

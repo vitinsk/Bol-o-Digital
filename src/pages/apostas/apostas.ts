@@ -10,6 +10,7 @@ import { ApostadorDTO } from '../../models/apostador.dto';
 import { StorageProvider } from '../../providers/storage/storage';
 import { CaixaProvider } from '../../providers/caixa/caixa';
 import { Caixa } from '../../models/caixa';
+import { Evento } from '../../models/evento';
 
 
 @IonicPage()
@@ -186,8 +187,8 @@ export class ApostasPage {
     return "R$ "+ valor+",00";
   }
 
-  todasApostas(evento_id: String){
-    this.navCtrl.push('TodasApostasPage', {evento: evento_id})
+  todasApostas(evento: Evento){
+    this.navCtrl.push('TodasApostasPage', {evento: evento})
   }
 
 
